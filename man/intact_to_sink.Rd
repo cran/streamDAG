@@ -17,7 +17,7 @@ size.intact.to.node(G, node = NULL)
 \arguments{
 
   \item{G}{
-A graph object of class "igraph", , see \code{\link[igraph]{graph_from_literal}}  
+A graph object of class "igraph", see \code{\link[igraph]{graph_from_literal}}  
 }
   \item{sink}{
 The sink node of \code{G}.

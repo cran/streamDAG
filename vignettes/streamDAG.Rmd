@@ -19,12 +19,12 @@ vignette: >
 
 
 <!-- # The *streamDAG* Package -->
-The *streamDAG* package provides indices and tools for analyzing directed acyclic graph (DAG) representations of intermittent stream networks. The DAG framework allows a wide range of analytical approaches for intermittent streams including classic measures from hydrology, ecology, and of course, graph theory. A focus of many *streamDAG* algorithms is the measurement of 1) "local" arc (stream segment) and nodal (inter-arc) characteristics, and 2) network-level complexity and connectivity.  While many of these approaches are purely topological, a non-trivial number of DAG indices, particularly weighted approaches, will provide outcomes identical to existing hydrological (non-graph-theoretic) measures for streams. Perennial streams (and even non-stream networks) can be analyzed with *streamDAG* algorithms. However, a major motivator for the package was the development of procedures that consider the spatio-temporal variability of intermittent stream networks.
+The *streamDAG* package provides indices and tools for analyzing directed acyclic graph (DAG) representations of intermittent stream networks. The DAG framework allows a wide range of analytical approaches for intermittent streams including classic measures from hydrology, ecology, and of course, graph theory. A focus of many *streamDAG* algorithms is the measurement of 1) "local" arc (stream segment) and nodal (inter-arc) characteristics, and 2) network-level complexity and connectivity.  While many of these approaches are purely topological, a non-trivial number of DAG indices, particularly weighted approaches, will provide outcomes identical to existing hydrological (non-graph-theoretic) measures for streams. These include Integral Connectivity Scale Length (ICSL) and its variants (Western et al. 2013) 
+Perennial streams (and even non-stream networks) can be potentially analyzed with *streamDAG* algorithms. However, the major motivator for the package was the development of procedures that consider the spatio-temporal variability of intermittent stream networks. As a result most *streamDAG* algorithms assume that graphs are directed (from upstream to downstream).  Thus, these functions may produce errors if directed graphs are used without checking function arguments.
 
-The *streamDAG* package is built under the basic idiom of the *igraph* package [@csardi], and most of its functions utilize *igraph* basis algorithms.  Newest (developmental) versions of *streamDAG* can be obtained from the public GitHub repository: https://github.com/moondog1969/streamDAG. The package maintainer is Ken Aho (ahoken@isu.edu).  An authoritative introduction to the *streamDAG* package can be found in [@aho2023DAG].
+The *streamDAG* package is built under the basic idiom of the *igraph* package [@csardi], and most of its functions utilize *igraph* basis algorithms.  Newest (developmental) versions of *streamDAG* can be obtained from the public GitHub repository: https://github.com/moondog1969/streamDAG. The package maintainer is Ken Aho (ahoken@isu.edu).  An introduction to the *streamDAG* package can be found in [@aho2023DAG].
 
-
-As noted earlier, newest versions of the *streamDAG* package can be installed from the R console via GitHub, after installing the package *devtools*.  In particular, use: 
+Newest versions of the *streamDAG* package can be installed from the R console via GitHub, after installing the package *devtools*.  In particular, use: 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
@@ -36,7 +36,7 @@ library(knitr)
 ```
 
 
-```{r,warning = FALSE, message = FALSE}
+```{r,warning = FALSE, message = FALSE, eval = F}
 library(devtools)
 install_github("moondog1969/streamDAG")
 ```
@@ -56,7 +56,7 @@ library(streamDAG)
 
 # Introductory Examples of Usage
 ## Murphy Creek
-We begin with an in-depth demonstration the *streamDAG* package using Murphy Creek, a very simple intermittent stream in the Reynolds Creek experimental watershed in southwestern Idaho (Fig \@ref(fig:mc)).  From 6/3/2019 to 10/3/2019, stream presence data were acquired at 15 minute intervals from 25 Murphy Creek nodes, corresponding to 24 stream segment arcs. Bounding nodes were added to encompass the entire length of the network. This resulted in a final Murphy Creek network with 28 nodes and 27 arcs for analysis.
+We begin with an in-depth demonstration of the *streamDAG* package using Murphy Creek, a very simple intermittent stream in the Reynolds Creek experimental watershed in southwestern Idaho (Fig \@ref(fig:mc)).  From 6/3/2019 to 10/3/2019, stream presence data were acquired at 15 minute intervals from 25 Murphy Creek nodes, corresponding to 24 stream segment arcs. Bounding nodes were added to encompass the entire length of the network. This resulted in a final Murphy Creek network with 28 nodes and 27 arcs for analysis.
 
 ```{r mc, fig.cap = "The Reynolds Cr. experimental watershed in SW Idaho.", echo = F}
 knitr::include_graphics("rc.jpg", dpi = 150)
@@ -287,7 +287,7 @@ subset.nodate <- subset[,-1]
 # walk global.summary through node presence / absence data
 global <- matrix(ncol = 23, nrow = nrow(subset))
 for(i in 1:nrow(subset)){
-global[i,] <- global.summary(delete.nodes.pa(murphy_spring, subset.nodate[i,]), sink = "OUT")
+global[i,] <- global.summary(delete.nodes.pa(murphy_spring, subset.nodate[i,], na.response = "treat.as.1"), sink = "OUT")
 }
 
 
@@ -439,7 +439,7 @@ As with unweighted metrics, it may be informative to track weighted global (and 
 icsl <- 1:nrow(subset) -> intact.to.sink -> a.cent -> harary
 # walk global.summary through node presence / absence data
 for(i in 1:nrow(subset)){
-  temp.graph <- delete.nodes.pa(murphy_spring, subset.nodate[i,])
+  temp.graph <- delete.nodes.pa(murphy_spring, subset.nodate[i,], na.response = "treat.as.1")
   # replace direction symbol for igraph comparability
   namelv <- gsub(" -> ", "|", mur_lengths[,1]) 
   a <- attributes(E(temp.graph))$vname

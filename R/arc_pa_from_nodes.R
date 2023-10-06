@@ -1,6 +1,7 @@
-arc.pa.from.nodes <- function(G, node.pa){
+arc.pa.from.nodes <- function(G, node.pa, approach = "aho", na.rm = TRUE){
   if(length(attributes(E(G))$vnames) == 0) stop("graph has no arcs") 
     a <- attributes(A(G))$vnames
+    v <- attributes(V(G))$names
     bounds <- matrix(ncol = 2, data = unlist(strsplit(a, "\\|")), byrow = TRUE)  
     names <- colnames(node.pa)
     
@@ -13,10 +14,13 @@ arc.pa.from.nodes <- function(G, node.pa){
     m1[j] <- which(names == bounds[,1][j])
     m2[j] <- which(names == bounds[,2][j])
     }
+   
     temp1 <- temp[m1]
     temp2 <- temp[m2]
     temp3 <- rbind(temp1, temp2)
-    arc.pa[i,] <- as.matrix(colMeans(temp3, na.rm = TRUE))
+    if(approach == "aho") arc.pa[i,] <- as.matrix(colMeans(temp3, na.rm = na.rm))
+    if(approach == "dstream") arc.pa[i,] <- as.matrix(temp3[2,])
+    if(approach == "ustream") arc.pa[i,] <- as.matrix(temp3[1,])
     }
   
   colnames(arc.pa) <- gsub("\\|", " -> ", a)

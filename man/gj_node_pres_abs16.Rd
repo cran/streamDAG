@@ -5,7 +5,7 @@
 Stream node presence absence data for Gibson Jack Cr. Idaho, for a 2016 survey 
 }
 \description{
-Streamflow presence and absence data for each node location collected by manual observation November 6, 2016, May 6, 2017, and August 14, 2017.   
+Streamflow presence and absence data for each node location collected by manual observation November 6, 2016, May 6, 2017, and August 14, 2017.  Note, a longer dataset 2021-2023, gathered by the AIMS team at fewer points, is available for Gibson Jack under the name \code{gj_node_pres_abs}.  
 }
 \usage{data("gj_node_pres_abs16")}
 \format{

@@ -1,6 +1,6 @@
 Package: streamDAG
-Version: 1.4-5
-Date: 2023-8-18
+Version: 1.5
+Date: 2023-10-6
 Title: Analytical Methods for Stream DAGs
 Maintainer: Ken Aho <ahoken@isu.edu>
 Authors@R: c(person("Ken", "Aho", role = c("aut", "cre"), email = "ahoken@isu.edu"), person("Arya", "Legg", role = c("dtc", "ctb")), person("Rob", "Ramos", role = "dtc"), person("Maggi", "Kraft", role = "dtc"), person(c("Charles","T."), "Bond", role = "dtc"), person(c("Rebecca","L."), "Hale", role = "dtc"))
@@ -13,7 +13,7 @@ Description: Provides indices and tools for directed acyclic graphs (DAGs), part
 License: GPL (>= 2)
 LazyLoad: yes
 NeedsCompilation: no
-Packaged: 2023-08-18 22:22:49 UTC; ahoken
+Packaged: 2023-10-06 17:15:15 UTC; ahoken
 Author: Ken Aho [aut, cre],
   Arya Legg [dtc, ctb],
   Rob Ramos [dtc],
@@ -21,4 +21,4 @@ Author: Ken Aho [aut, cre],
   Charles T. Bond [dtc],
   Rebecca L. Hale [dtc]
 Repository: CRAN
-Date/Publication: 2023-08-21 13:20:02 UTC
+Date/Publication: 2023-10-06 18:50:02 UTC

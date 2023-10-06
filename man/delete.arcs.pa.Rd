@@ -13,7 +13,6 @@ delete.arcs.pa(G, pa)
 }
 
 \arguments{
-
   \item{G}{A graph object of class "igraph", see \code{\link[igraph]{graph_from_literal}}
 
 }

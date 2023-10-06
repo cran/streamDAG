@@ -12,8 +12,8 @@ bibentry(
        person(c("Charles","T."), "Bond", role = "dtc")
        ),
      year = "2023",
-     note = "R package version 1.4-5",
-     url = "https://github.com/moondog1969/streamDAG",
+     note = "R package version 1.5",
+     url = " https://CRAN.R-project.org/package=streamDAG",
      key = "streamDAG-package"
 )
 

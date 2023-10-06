@@ -5,9 +5,9 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA)
 library(igraph)
 library(knitr)
 
-## ----warning = FALSE, message = FALSE-----------------------------------------
-library(devtools)
-install_github("moondog1969/streamDAG")
+## ----warning = FALSE, message = FALSE, eval = F-------------------------------
+#  library(devtools)
+#  install_github("moondog1969/streamDAG")
 
 ## ----eval = F-----------------------------------------------------------------
 #  install.packages("streamDAG")
@@ -142,7 +142,7 @@ subset.nodate <- subset[,-1]
 # walk global.summary through node presence / absence data
 global <- matrix(ncol = 23, nrow = nrow(subset))
 for(i in 1:nrow(subset)){
-global[i,] <- global.summary(delete.nodes.pa(murphy_spring, subset.nodate[i,]), sink = "OUT")
+global[i,] <- global.summary(delete.nodes.pa(murphy_spring, subset.nodate[i,], na.response = "treat.as.1"), sink = "OUT")
 }
 
 
@@ -259,7 +259,7 @@ ICSL(murphy_spring, coords = mur_coords[,2:3], names = mur_coords[,1])
 icsl <- 1:nrow(subset) -> intact.to.sink -> a.cent -> harary
 # walk global.summary through node presence / absence data
 for(i in 1:nrow(subset)){
-  temp.graph <- delete.nodes.pa(murphy_spring, subset.nodate[i,])
+  temp.graph <- delete.nodes.pa(murphy_spring, subset.nodate[i,], na.response = "treat.as.1")
   # replace direction symbol for igraph comparability
   namelv <- gsub(" -> ", "|", mur_lengths[,1]) 
   a <- attributes(E(temp.graph))$vname

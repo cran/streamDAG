@@ -21,7 +21,8 @@ spatial.plot(G, x, y, names = NULL,
                          col.dry = gray(.7),
                          cex.dry = 1, pch.dry = 19, 
                          arrow.col.dry = gray(.7), arrow.lwd.dry = 1,
-                         cnw = NULL, xlim = NULL, ylim = NULL, ...)
+                         cnw = NULL, xlim = NULL, ylim = NULL, 
+                         arrow.warn = TRUE, ...)
 
 
 spatial.plot.sf(x, y, names, shapefile = NULL, cex = 1, arrow.col = "lightblue", 
@@ -107,12 +108,15 @@ A numeric vector of length 2, giving the lower and upper \emph{y}-axis limits.
   \item{ylim}{
 A numeric vector of length 2, giving the lower and upper \emph{x}-axis limits. 
 }
+
+  \item{arrow.warn}{Logical.  The function \code{\link{arrows}} omits arrowheads (with a warning) for any arrow of length less than 1/1000 inch. To elimiate this warning (which may occur for nearby nodes) specify \code{arrow.warn = FALSE}. 
+}
   \item{\dots}{
 Other arguments to \code{\link{plot}}
 }
 }
 \details{ 
-The function \code{spatial.plot} makes a plot of stream DAG, showing arc flow directions to and from spatial node locations. The function can also be used to identify node and arc arrow coordinates for plotting (see Examples). The function \code{spatial.plot.sf} can create a spatially explicit graph from a stream shapefile with the stream outlay under a ggplot framework (see Examples). The function \code{spatial.plot} currently has gretly flexibility (for instance, it can be used to distinguish dry and wet nodes and arcs) because it is based on underlying \emph{igraph} DAGs. 
+The function \code{spatial.plot} makes a plot of a stream DAG, showing arc flow directions to and from spatial node locations. The function can also be used to identify node and arc arrow coordinates for plotting (see Examples). The function \code{spatial.plot.sf} can create a spatially explicit graph from a stream shapefile with the stream outlay under a ggplot framework (see Examples). The function \code{spatial.plot} can be used to distinguish dry and wet nodes and arcs) (see Examples). 
 }
 
 \value{
@@ -138,17 +142,16 @@ names <- mur_coords[,1]
 spatial.plot(G, x, y, names)
 
 # using shapefiles
+
 \donttest{
-library(ggplot2); library(sf)
+library(ggplot2); library(sf); library(ggrepel)
 mur_sf <- st_read(system.file("shape/Murphy_Creek.shp", package="streamDAG"))
 g1 <- spatial.plot.sf(x, y, names, shapefile = mur_sf)
 
 # modify ggplot
-library(ggrepel)
-g1 <- spatial.plot(G, x, y, names, 
-plot.shapefile = TRUE, shapefile = mur_sf)
 g1 + theme_classic()
 }
+
 
 #-- Distinguishing wet and dry arcs and nodes --#
 
@@ -162,32 +165,34 @@ spatial.plot(G1, x, y, names)
 # Example 2 (show wet nodes and arcs with associated wet nodes, and dry nodes)
 spatial.plot(G1, x, y, names, plot.dry = TRUE)
 
-# Example 3 (show wet nodes and arcs with associated wet nodes, and underlying network)
+# Example 3 (show wet nodes and arcs wet node arcs, and underlying network)
 entire <- spatial.plot(G, x, y, names, plot = FALSE)
 spatial.plot(G, x, y, names, plot.dry = TRUE, cnw = entire)
 
+
 #-- Animation: drying of Johnson Draw drainage --#
 \donttest{
-data(jd_lengths)
-jd_graph <- streamDAGs("jd_stic_full")
+jd_graph <- streamDAGs("jd_full")
 data(AIMS.node.coords)
 jd_coords <- AIMS.node.coords[AIMS.node.coords$site == "JD",]
+jd_coords <- jd_coords[jd_coords$STIC_inferred_PA,] 
 data(jd_node_pres_abs)
-jd_coords <- jd_coords[-c(1:7),] # remove piezometer coordinates
 
 pb = txtProgressBar(min = 1, max = 250, initial = 1, style = 3) 
 times <- round(seq(1,50322, length = 250),0)
 
 for(i in 1:250){
   dev.flush()
-  jd_sub <- delete.nodes.pa(jd_graph, jd_node_pres_abs[times[i],][-1])
+  jd_sub <- delete.nodes.pa(jd_graph, 
+                            jd_node_pres_abs[times[i],][-1],
+                            na.response = "treat.as.1")
   spatial.plot(jd_sub, 
                x = jd_coords[,3], 
                y = jd_coords[,2], 
                names = jd_coords[,1], 
                ylim = c(43.122, 43.129), 
                xlim = c(-116.8, -116.775), 
-               plot.dry = TRUE, main = jd_node_pres_abs[times[i],][1], 
+               plot.dry = TRUE, main = jd_node_pres_abs[,1][times[i]], 
                xlab = "Longitude", ylab = "Latitude")
   dev.hold()
   Sys.sleep(.05)

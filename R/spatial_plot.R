@@ -25,9 +25,9 @@ spatial.plot <- function(G, x, y, names = NULL,
                          col.dry = gray(.7),
                          cex.dry = 1, pch.dry = 19, 
                          arrow.col.dry = gray(.7), arrow.lwd.dry = 1,
-                         cnw = NULL, xlim = NULL, ylim = NULL, ...)
+                         cnw = NULL, xlim = NULL, ylim = NULL, arrow.warn = TRUE,...)
 {
-
+if(!arrow.warn){op <- options(); options(warn = -1)} 
 if(is.null(names)) names <- 1:length(x)
 if(length(V(G)$name) == 0){ # empty network
   if(plot){
@@ -85,7 +85,9 @@ if(length(V(G)$name) == 0){ # empty network
         if(plot.dry & all(!is.na(x.d)) & !is.null(cnw)){
           points(cnw$x, cnw$y, pch = pch.dry, col = col.dry, cex = cex.dry)
           if(length(attributes(E(G))$vnames) > 0){
-          arrows(cnw$x0, cnw$y0, cnw$x1, cnw$y1, col = arrow.col.dry, length = .08, lwd = arrow.lwd.dry)}
+            # warning given by arrows for nearby points
+            arrows(cnw$x0, cnw$y0, cnw$x1, cnw$y1, col = arrow.col.dry, 
+                                     length = .08, lwd = arrow.lwd.dry)}
           }
       
         if(plot.dry & all(!is.na(x.d)) & is.null(cnw)){
@@ -93,10 +95,12 @@ if(length(V(G)$name) == 0){ # empty network
       
       points(x, y, pch = pch, col = col, cex = cex, bg = pt.bg)
       if(length(attributes(E(G))$vnames) > 0){
-      arrows(x0, y0, x1, y1, col = arrow.col, length = .08, lwd = arrow.lwd)
+        # warning given by arrows for nearby points
+        arrows(x0, y0, x1, y1, col = arrow.col, length = .08, lwd = arrow.lwd)
       }
       if(cex.text != 0){thigmophobe.labels(x.n, y.n, names, cex = cex.text)}
     }
+    if(!arrow.warn) options(op)
     outL <- list()
     outL$x <- x; outL$y <- y
     if(length(attributes(E(G))$vnames) > 0){

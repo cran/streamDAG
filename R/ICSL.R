@@ -1,4 +1,6 @@
 ICSL <- function(G, coords = NULL, names = NULL, lengths = NULL, dist.matrix = NULL, show.dist = FALSE){
+  if(nrow(distances(G)) == 0){icsl <- NA; d <- NA} 
+  if(nrow(distances(G)) > 0){
   if(is.null(coords) & is.null(length) & length(E(G)$weight) == 0) stop("One of coords or lengths or lenghts using E(G)$weight must be specfied")
   if(length(attributes(E(G))$vnames) == 0) {icsl <- NA; d <- NA} else{
   a <- attributes(E(G))$vnames
@@ -37,7 +39,7 @@ ICSL <- function(G, coords = NULL, names = NULL, lengths = NULL, dist.matrix = N
   d2 <- as.dist(d2)
   icsl <- mean(d2, na.rm = TRUE)
   }
-  }
+  }}
   if(show.dist) list(iscl = icsl, distance.matrix = d) else icsl  
 }
 
