@@ -12,7 +12,7 @@ Lengths of stream (arc) segments from Dry Creek Idaho (outlet coordinates: 43.71
   A data frame with 28 observations on the following 2 variables.
   \describe{
     \item{\code{Arcs}}{Arc names, arrows directionally connect nodes.}
-    \item{\code{Lengths}}{Stream segment (arc) length in meters.}
+    \item{\code{Lengths}}{Stream segment (arc) length in kilometers.}
   }
 }
 \source{

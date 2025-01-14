@@ -11,12 +11,11 @@ bibentry(
        person("Maggi", "Kraft", role = "dtc"),
        person(c("Charles","T."), "Bond", role = "dtc")
        ),
-     year = "2023",
-     note = "R package version 1.5",
+     year = "2024",
+     note = "R package version 1.5-8",
      url = " https://CRAN.R-project.org/package=streamDAG",
      key = "streamDAG-package"
 )
-
 bibentry(
      bibtype = "Article",
      title="Non-perennial stream networks as directed acyclic graphs: The R-package streamDAG",

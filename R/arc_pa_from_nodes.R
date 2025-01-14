@@ -15,8 +15,8 @@ arc.pa.from.nodes <- function(G, node.pa, approach = "aho", na.rm = TRUE){
     m2[j] <- which(names == bounds[,2][j])
     }
    
-    temp1 <- temp[m1]
-    temp2 <- temp[m2]
+    temp1 <- as.numeric(temp[m1])
+    temp2 <- as.numeric(temp[m2])
     temp3 <- rbind(temp1, temp2)
     if(approach == "aho") arc.pa[i,] <- as.matrix(colMeans(temp3, na.rm = na.rm))
     if(approach == "dstream") arc.pa[i,] <- as.matrix(temp3[2,])

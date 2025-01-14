@@ -14,7 +14,7 @@ path.lengths.sink(G, sink = NULL, inf.paths = TRUE)
 \arguments{
 
   \item{G}{
-  Graph object of class "igraph", see: See \code{\link[igraph]{graph_from_literal}}.
+  Graph object of class "igraph", see: \code{\link[igraph]{graph_from_literal}}.
 }
   \item{sink}{
   sink node from \code{G}.

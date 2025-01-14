@@ -152,7 +152,6 @@ g1 <- spatial.plot.sf(x, y, names, shapefile = mur_sf)
 g1 + theme_classic()
 }
 
-
 #-- Distinguishing wet and dry arcs and nodes --#
 
 data(mur_node_pres_abs) # STIC H2O presence/absence
@@ -167,7 +166,7 @@ spatial.plot(G1, x, y, names, plot.dry = TRUE)
 
 # Example 3 (show wet nodes and arcs wet node arcs, and underlying network)
 entire <- spatial.plot(G, x, y, names, plot = FALSE)
-spatial.plot(G, x, y, names, plot.dry = TRUE, cnw = entire)
+spatial.plot(G1, x, y, names, plot.dry = TRUE, cnw = entire)
 
 
 #-- Animation: drying of Johnson Draw drainage --#
@@ -178,13 +177,17 @@ jd_coords <- AIMS.node.coords[AIMS.node.coords$site == "JD",]
 jd_coords <- jd_coords[jd_coords$STIC_inferred_PA,] 
 data(jd_node_pres_abs)
 
+# Drop 2023 sites 
+jd_pa <- jd_node_pres_abs[,-c( 22, 23, 24, 25, 26, 27, 
+28, 31, 32, 33, 34, 35, 36, 37)]
+
 pb = txtProgressBar(min = 1, max = 250, initial = 1, style = 3) 
 times <- round(seq(1,50322, length = 250),0)
 
 for(i in 1:250){
   dev.flush()
   jd_sub <- delete.nodes.pa(jd_graph, 
-                            jd_node_pres_abs[times[i],][-1],
+                            jd_pa[times[i],][-1],
                             na.response = "treat.as.1")
   spatial.plot(jd_sub, 
                x = jd_coords[,3], 

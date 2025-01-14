@@ -9,11 +9,10 @@ Stream node surface water presence absence data from Gibson Jack, Idaho (outlet 
 }
 \usage{data("gj_node_pres_abs")}
 \format{
-  A data frame with 55109 observations on the following 30 variables.
+  A data frame with 55109 observations on the following 36 variables.
   \describe{
-    \item{\code{datetime}}{a POSIXlt}
+    \item{\code{datetime}}{a POSIXlt vector}
     \item{\code{GJ16}}{a numeric vector}
-    \item{\code{GJ15}}{a numeric vector}
     \item{\code{GJ14}}{a numeric vector}
     \item{\code{C2}}{a numeric vector}
     \item{\code{C3}}{a numeric vector}
@@ -21,6 +20,7 @@ Stream node surface water presence absence data from Gibson Jack, Idaho (outlet 
     \item{\code{GJ11}}{a numeric vector}
     \item{\code{GJ13}}{a numeric vector}
     \item{\code{GJ12}}{a numeric vector}
+    \item{\code{GJ19}}{a numeric vector}
     \item{\code{GJ20}}{a numeric vector}
     \item{\code{GJ18}}{a numeric vector}
     \item{\code{GJ17}}{a numeric vector}
@@ -32,7 +32,7 @@ Stream node surface water presence absence data from Gibson Jack, Idaho (outlet 
     \item{\code{GJ22}}{a numeric vector}
     \item{\code{C1}}{a numeric vector}
     \item{\code{C7}}{a numeric vector}
-    \item{\code{GJ24}}{a numeric vector}
+    \item{\code{GJ25}}{a numeric vector}
     \item{\code{GJ21}}{a numeric vector}
     \item{\code{GJ8}}{a numeric vector}
     \item{\code{GJ7}}{a numeric vector}
@@ -41,6 +41,13 @@ Stream node surface water presence absence data from Gibson Jack, Idaho (outlet 
     \item{\code{GJ6}}{a numeric vector}
     \item{\code{GJ5}}{a numeric vector}
     \item{\code{GJ4}}{a numeric vector}
+    \item{\code{GPZ02}}{a numeric vector}
+    \item{\code{GPZ03}}{a numeric vector}
+    \item{\code{GPZ04}}{a numeric vector}
+    \item{\code{GPZ05}}{a numeric vector}
+    \item{\code{GPZ06}}{a numeric vector}
+    \item{\code{GPZ07}}{a numeric vector}
+    \item{\code{GSS01}}{a numeric vector}
   }
 }
 \source{

@@ -1,18 +1,19 @@
 ## ----setup, include=FALSE-----------------------------------------------------
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
 
-## ---- echo = F, message = F, warning = F--------------------------------------
+## ----echo = F, message = F, warning = F---------------------------------------
 library(igraph)
 library(knitr)
 
 ## ----warning = FALSE, message = FALSE, eval = F-------------------------------
+#  # install.packages("devtools")
 #  library(devtools)
 #  install_github("moondog1969/streamDAG")
 
 ## ----eval = F-----------------------------------------------------------------
 #  install.packages("streamDAG")
 
-## ---- warning = FALSE---------------------------------------------------------
+## ----warning = FALSE----------------------------------------------------------
 library(streamDAG)
 
 ## ----mc, fig.cap = "The Reynolds Cr. experimental watershed in SW Idaho.", echo = F----
@@ -78,7 +79,7 @@ spatial.plot(G1, x, y, names, cex.text = .7)
 ## ----s4, fig.height = 5.5, fig.width = 6.5, fig.cap = "Dry nodes overlaid on `murphy_spring`. "----
 spatial.plot(G1, x, y, names, plot.dry = TRUE, cex.text = .7)
 
-## ---- s42, fig.height = 5.5, fig.width = 6.5, fig.cap = "Dry portions of the network underlying wet nodes and associated arcs."----
+## ----s42, fig.height = 5.5, fig.width = 6.5, fig.cap = "Dry portions of the network underlying wet nodes and associated arcs."----
 spc <- spatial.plot(murphy_spring, x, y, names, plot = FALSE)
 spatial.plot(G1, x, y, names, plot.dry = TRUE, cex.text = .7, cnw = spc)
 
@@ -507,7 +508,7 @@ corr <- cor(conversion, use = "pairwise.complete.obs")
 ## -----------------------------------------------------------------------------
 corrected.corr <- R.bounds(marginal, corr)
 
-## ---- eval = F----------------------------------------------------------------
+## ----eval = F-----------------------------------------------------------------
 #  library(mipfp)
 #  p.joint.all <- ObtainMultBinaryDist(corr = corrected.corr, marg.probs = marginal,
 #                                      tol = 0.001, tol.margins = .001, iter = 100)

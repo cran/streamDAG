@@ -35,7 +35,7 @@ Output consists of the following:
 Ken Aho
 }
 \seealso{
-\code{\link[streamDAG]{stream.order}}, \code{\link[igraph]{delete.vertices}}, code{\link[igraph]{add.vertices}}, code{\link[igraph]{add.edges}}
+\code{\link[streamDAG]{stream.order}}, \code{\link[igraph]{delete.vertices}}, \code{\link[igraph]{add.vertices}}, \code{\link[igraph]{add.edges}}
 }
 \examples{
 G <- graph_from_literal(a --+ c --+ e, b --+ d --+ e --+ f --+ p, g --+ i --+ j --+ m, 

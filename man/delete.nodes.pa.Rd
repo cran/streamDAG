@@ -18,13 +18,13 @@ delete.nodes.pa(G, pa, na.response = "none")
 
 }
   \item{pa}{
-A vector of binary = 0,1 values indicating the absence or presence of nodes from \code{V(G)}.
+A vector of binary = 0,1 values indicating the absence or presence of nodes from \code{V(G)}. Adding a names attribute to \code{pa} allows checking of the correspondence of the order of node names in \code{G} and \code{pa}.  
 }
 \item{na.response}{
-One of \code{"none"}, \code{"treat.as.0"}, or \code{"treat.as.1"}.
+One of \code{"none"}, \code{"treat.as.0"}, or \code{"treat.as.1"} (see Details).
 }
 }
-\details{A perennial problem with STIC (Stream Temperature, Intermittency, and Conductivity) sensors is the presence of missing data.  If \code{na.response = "none"} and NAs exist then the waring message \code{"NAs in data need to be addressed. NAs converted 0."} is printed.  One can also choose \code{na.response = "treat.as.0"} or \code{na.response = "treat.as.1"} which converts NAs to zeroes or ones.  Clearly, none of these draconian approaches is optimal.  Thus if NAs occur, an attribute is added to the output graph object returned by function which lists the nodes with missing data. This attribute can be obtained with \code{out$$NA.vertices} where \code{out <- delete.nodes.pa(...)}, see Examples below.  An alternative is to use a classification algorithm for imputation e.g., \code{missForest::missForest}. 
+\details{A perennial problem with STIC (Stream Temperature, Intermittency, and Conductivity) sensors is the presence of missing data.  If \code{na.response = "none"} and NAs exist then the waring message \code{"NAs in data need to be addressed. NAs converted 0."} is printed.  One can also choose \code{na.response = "treat.as.0"} or \code{na.response = "treat.as.1"} which converts NAs to zeroes or ones.  Clearly, none of these draconian approaches is optimal.  Thus, if NAs occur, an attribute is added to the output graph object returned by the function, which lists the nodes with missing data. This attribute can be obtained with \code{out$NA.vertices} where \code{out <- delete.nodes.pa(...)}, see Examples below.  An alternative is to use a classification algorithm for imputation e.g., \code{\link{STIC.RFimpute}}, which uses \code{missForest::missForest}. 
 }
 \value{Returns a \emph{igraph} graph object, missing the nodes indicated with 0 in \code{pa}.}
 \author{

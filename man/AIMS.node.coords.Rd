@@ -18,6 +18,7 @@ Contains spatial coordinates for graph nodes for stream networks in the Aquatic 
     \item{\code{piezo}}{Logical, indicating whether the location contains a peizometer.}
     \item{\code{microbial_seasonal_network}}{Logical, whether the location was sampled as part of AIMS seasonal microbial sampling.}
     \item{\code{STIC_inferred_PA}}{Logical, whether surface water presence/absence data were obtained from STIC  (Stream Temperature, Intermittency, and Conductivity) sensors at the location.}
+    \item{\code{New_in_2023}}{Logical, referring to sites at Johnson Draw added in 2023.}
   }
 }
 \keyword{datasets}

@@ -1,6 +1,4 @@
-streamDAGs <- function(graph = c("dc_piezo_full", "dc_full", "gj_full16", "gj_synoptic_2023", "gj_full", 
-                                  "jd_piezo_full","jd_full", "konza_full", "KD0521", "KD0528", "KD0604",
-                                  "mur_full", "td_full", "wh_full", "pr_full")) 
+streamDAGs <- function(graph = c("dc_piezo_full", "dc_full", "gj_full16", "gj_synoptic_2023", "gj_full", "gj_piezo_full", "jd_piezo_full", "jd_piezo_full_2023","jd_full", "konza_full", "KD0521", "KD0528", "KD0604", "mur_full", "td_full", "wh_full", "pr_full")) 
 {
     
   if (graph == "dc_piezo_full") {
@@ -13,7 +11,7 @@ streamDAGs <- function(graph = c("dc_piezo_full", "dc_full", "gj_full16", "gj_sy
                               "DC20" --+ "C6" --+ "DC4" --+ "C7",
                               "DC1" --+ "DC2" --+ "DC3" --+ "C7" --+ "DC5" --+ "DPZ02" --+ "C8",
                               "DPZ04" --+"DPZ03" --+ "DC9" --+ "C9",
-                              "DC8" --+ "C9" --+ "DC7" --+ "C8" --+ "DC6" --+ "DPZ01")
+                              "DC8" --+ "C9" --+ "DC7" --+ "C8" --+ "DC6" --+ "DSS01")
      }
   
   
@@ -47,10 +45,10 @@ streamDAGs <- function(graph = c("dc_piezo_full", "dc_full", "gj_full16", "gj_sy
   }
   
   else if (graph == "gj_full") {  
-  out <- graph_from_literal("GJ16" --+ "GJ15" --+ "GJ14" --+ "C2" --+ "C3" --+ "C4" --+ "GJ11",
+  out <- graph_from_literal("GJ16" --+ "GJ14" --+ "C2" --+ "C3" --+ "C4" --+ "GJ11",
                               "GJ13" --+ "C2",
                               "GJ12" --+ "C3",
-                              "GJ20" --+ "GJ18" --+ "GJ17" --+ "C4" --+ "GJ11" --+ "C5",
+                              "GJ20" --+ "GJ19" --+ "GJ18" --+ "GJ17" --+ "C4" --+ "GJ11" --+ "C5",
                               "GJ10" --+ "GJ9" --+ "C5" --+ "C6",
                               "GJ23" --+ "GJ22" --+ "C1" --+ "C6" --+ "C7",
                               "GJ24" --+ "GJ21" --+ "C1",
@@ -62,8 +60,24 @@ else if (graph == "gj_synoptic_2023") {
   out <- graph_from_literal("GJ20"--+"GJ74"--+"GJ73"--+"GJ19"--+"GJ72"--+"GJ71"--+"GJ18"--+"GJ17"--+"GJ70"--+"GJ64","GJ16"--+"GJ15"--+"GJ69"--+"GJ14"--+"P8"--+"GPZ07","GJ68"--+"GJ66","GJ67"--+"GJ13"--+"GJ66"--+"GJ65","GJ12"--+"GJ65"--+"GJ64"--+"GJ11"--+"GJ63"--+"GJ55","GJ62"--+"GJ61"--+"GJ60"--+"GJ59"--+"GJ58"--+"GJ10"--+"GJ9"--+"GJ57"--+"GJ56"--+"GJ55"--+"GJ54"--+"GJ53"--+"GJ52"--+"GJ51","GJ23"--+"GJ22"--+"GJ79"--+"GJ21","GJ25"--+"GJ24"--+"GJ21"--+"GJ78"--+"GPZ06"--+"GJ77"--+"GJ76"--+"GJ75"--+"GJ51"--+"GJ50"--+"GJ3"--+"GJ42"--+"GJ2"--+"GJ1","GJ41"--+"GJ40"--+"GJ39"--+"GJ37"--+"GJ36","GJ6"--+"GJ38"--+"GJ5"--+"GJ36"--+"GPZ05"--+"GJ4"--+"GJ35"--+"GJ34"--+"GPZ04"--+"GJ33"--+"GJ32"--+"GJ31"--+"GPZ03"--+"GPZ02"--+"GJ30"--+"GJ1"--+"GSS01")
 }
 
+else if (graph == "gj_piezo_full") {  
+    out <- graph_from_literal("GJ16" --+ "GJ14" --+ "GPZ07" --+ "C2" --+ "C3" --+ "C4" --+ "GJ11",
+  "GJ13" --+ "C2",
+  "GJ12" --+ "C3",
+  "GJ20" --+ "GJ19" --+ "GJ18" --+ "GJ17" --+ "C4" --+ "GJ11" --+ "C5",
+  "GJ10" --+ "GJ9" --+ "C5" --+ "C6",
+  "GJ23" --+ "GJ22" --+ "C1" --+ "GPZ06" --+ "C6" --+ "C7",
+  "GJ25" --+ "GJ21" --+ "C1",
+  "GJ8" --+ "GJ7" --+ "C7" --+ "GJ3" --+ "C8",
+  "GJ6" --+ "GJ5" --+ "GPZ05" --+ "GJ4" --+ "GPZ04" --+ "GPZ03" --+ "GPZ02" --+ "C8" --+ "GSS01")
+}
+
   else if (graph == "jd_piezo_full") {
-    out <- graph_from_literal("JPZ07" --+"JD5" --+"JPZ06" --+"JD6" --+"JD7" --+"JPZ05" --+"C1", "JD10" --+"JD9" --+"JD8" --+"C1" --+"JD11" --+ "JD12" --+"JD13" --+"C2" --+"JD16" --+"JPZ03" --+"JD17" --+"JD18" --+"JD19" --+"JD20" --+"JD4" --+"JD3" --+"JPZ02" --+"JD2" --+"JD1" --+"JPZ01", "JD15" --+"JPZ04" --+"JD14" --+"C2")
+    out <- graph_from_literal("JPZ07" --+"JD5" --+"JPZ06" --+"JD6" --+"JD7" --+"JPZ05" --+"C1", "JD10" --+"JD9" --+"JD8" --+"C1" --+"JD11" --+ "JD12" --+"JD13" --+"C2" --+"JD16" --+"JPZ03" --+"JD17" --+"JD18" --+"JD19" --+"JD20" --+"JD4" --+"JD3" --+"JPZ02" --+"JD2" --+ "JSS01" --+ "JD1", "JD15" --+"JPZ04" --+"JD14" --+"C2")
+  }
+  
+  else if (graph == "jd_piezo_full_2023") {
+    out <- graph_from_literal("JPZ07" --+ "JD28" --+ "JD5" --+ "JPZ06" --+ "JD6" --+ "JD7" --+ "JPZ05" --+ "C1", "JD10" --+ "JD27" --+ "JD9" --+ "JD8" --+ "C1" --+ "JD11" --+ "JD26"  --+ "JD12" --+ "JD13" --+ "C2" --+ "JD16" --+ "JPZ03" --+"JD17" --+ "JD23" --+ "JD18" --+ "JD22" --+ "JD19" --+ "JD20" --+ "JD4" --+ "JD21" --+ "JD3" --+ "JPZ02" --+ "JD2" --+ "JSS01" --+ "JD1", "JD15" --+ "JPZ04" --+ "JD14" --+ "JD25" --+ "C2")
   }
   
   else if (graph == "jd_full") {
